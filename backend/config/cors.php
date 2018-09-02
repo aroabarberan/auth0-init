@@ -11,9 +11,10 @@ return [
     | to accept any value.
     |
     */
-   
-    'supportsCredentials' => false,
-    'allowedOrigins' => ['*'],
+
+    'supportsCredentials' => true,
+    // Whitelist of domains allowed to perform cross origin requests
+    'allowedOrigins' => ['http://localhost:3000'],
     'allowedOriginsPatterns' => [],
     'allowedHeaders' => ['*'],
     'allowedMethods' => ['*'],

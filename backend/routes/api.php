@@ -13,20 +13,21 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::get('/public', function (Request $request) {
     return response()->json(["message" => "Hello from a public endpoint! You don't need to be authenticated to see this."]);
 });
 
 Route::get('/private', function (Request $request) {
-    return response()->json(["message" => "Hello from a private endpoint! You need to have a valid Access Token to see this."]);
+    return response()->json(["message" => "Hello from a private endpoint! You need to have a valid access token to see this."]);
 })->middleware('jwt');
 
 Route::get('/private-scoped', function (Request $request) {
     return response()->json([
-        "message" => "Hello from a private endpoint! You need to have a valid Access Token and a scope of read:messages to see this."
+        "message" => "Hello from a private endpoint! You need to have a valid access token and a scope of read:messages to see this."
     ]);
 })->middleware('check.scope:read:messages');
+
+
+Route::get('/auth0/callback', function() {
+    dd(Auth0::getUser());
+ });
