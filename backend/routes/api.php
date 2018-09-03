@@ -26,8 +26,3 @@ Route::get('/private-scoped', function (Request $request) {
         "message" => "Hello from a private endpoint! You need to have a valid access token and a scope of read:messages to see this."
     ]);
 })->middleware('check.scope:read:messages');
-
-
-Route::get('/auth0/callback', function() {
-    dd(Auth0::getUser());
- });
