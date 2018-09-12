@@ -1,5 +1,6 @@
 <?php
 
+use App\Recipe;
 use Illuminate\Http\Request;
 
 /*
@@ -14,15 +15,17 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/public', function (Request $request) {
-    return response()->json(["message" => "Hello from a public endpoint! You don't need to be authenticated to see this."]);
+    return response()->json(["message" => "This content it is totaly public "]);
 });
 
 Route::get('/private', function (Request $request) {
-    return response()->json(["message" => "Hello from a private endpoint! You need to have a valid access token to see this."]);
+    return response()->json(Recipe::all());
+    // return response()->json(["message" => "Hello from a private endpoint! You need to have a valid access token to see this."]);
 })->middleware('jwt');
 
 Route::get('/private-scoped', function (Request $request) {
     return response()->json([
-        "message" => "Hello from a private endpoint! You need to have a valid access token and a scope of read:messages to see this."
+        "message" => "Hello from a private endpoint!
+         You need to have a valid access token and a scope of read:messages to see this."
     ]);
 })->middleware('check.scope:read:messages');
